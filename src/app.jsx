@@ -110,7 +110,7 @@ Salida esperada exacta: ${exercise.tests[0].expected}
 Simula la ejecución del código y responde ÚNICAMENTE en este formato JSON (sin ningún otro texto ni markdown):
 {"output":"salida al ejecutarse o vacío si hay error","error":"mensaje de error o vacío","correct":true_o_false,"feedback":"feedback breve y motivador en español (máx 2 frases)"}`;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/claude", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -126,7 +126,7 @@ Simula la ejecución del código y responde ÚNICAMENTE en este formato JSON (si
 
 async function getHintFromAI(code, exercise) {
   const prompt = `Eres un tutor de Python. El estudiante está atascado en: "${exercise.title}"\nDescripción: ${exercise.description}\nCódigo actual:\n\`\`\`python\n${code}\n\`\`\`\nDa una pista útil en español en máximo 2 frases sin dar la solución. Sé motivador.`;
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/claude", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
